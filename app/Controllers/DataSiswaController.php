@@ -36,6 +36,9 @@ class DataSiswaController extends BaseController
         if (! $this->isLoggedIn()) {
             return redirect()->to('/');
         }
+        if (session()->role != 'admin'){
+            return redirect()->to('datasiswa');
+        }
         $data = [
             'title' => 'Tambah Data Siswa',
         ];
@@ -90,6 +93,9 @@ class DataSiswaController extends BaseController
         if (! $this->isLoggedIn()) {
             return redirect()->to('/');
         }
+        if (session()->role != 'admin'){
+            return redirect()->to('datasiswa');
+        }
         //model initialize
         $siswa = new SiswaModel();
 
@@ -133,6 +139,9 @@ class DataSiswaController extends BaseController
     {
         if (! $this->isLoggedIn()) {
             return redirect()->to('/');
+        }
+        if (session()->role != 'admin'){
+            return redirect()->to('datasiswa');
         }
         //model initialize
         $siswa = new SiswaModel();

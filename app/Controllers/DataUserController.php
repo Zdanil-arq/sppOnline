@@ -13,7 +13,9 @@ class DataUserController extends BaseController
         if (! $this->isLoggedIn()) {
             return redirect()->to('/');
         }
-
+        if (session()->role != 'admin'){
+            return redirect()->to('dashboard');
+        }
         $users = new UserModel();
         $data = [
             'title' => 'Data User | Pembayaran SPP Sekolah',
@@ -36,6 +38,9 @@ class DataUserController extends BaseController
     {
         if (! $this->isLoggedIn()) {
             return redirect()->to('/');
+        }
+        if (session()->role != 'admin'){
+            return redirect()->to('dashboard');
         }
         $data = [
             'title' => 'Tambah data admin'
@@ -107,6 +112,9 @@ class DataUserController extends BaseController
     {
         if (!$this->isLoggedIn()) {
             return redirect()->to('/');
+        }
+        if (session()->role != 'admin'){
+            return redirect()->to('dashboard');
         }
 
         // Inisialisasi model
@@ -188,6 +196,12 @@ class DataUserController extends BaseController
 
     //function delete
     public function delete($id_admin){
+        if (!$this->isLoggedIn()) {
+            return redirect()->to('/');
+        }
+        if (session()->role != 'admin'){
+            return redirect()->to('dashboard');
+        }
         //model initialize
         $userModel = new UserModel();
 
