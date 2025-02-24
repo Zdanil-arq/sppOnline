@@ -9,7 +9,8 @@
         </p>
     </div>
 
-    <div class="row d-flex justify-content-center m-3">
+    <?php if (session()->role == 'admin'):?>
+        <div class="row d-flex justify-content-center m-3">
 
         <div class="col-xl-3 col-sm-6 mb-4">
             <a href="<?= base_url('datasiswa') ?>" class="text-decoration-none">
@@ -79,5 +80,45 @@
             </a>
         </div> -->
     </div>
+    <?php endif?>
+
+    <?php if(session()->role == 'siswa'):?>
+        <div class="row d-flex justify-content-center m-3">
+
+        <div class="col-xl-3 col-sm-6 mb-4">
+            <a href="<?= base_url('datasiswa') ?>" class="text-decoration-none">
+                <div class="card shadow h-100 py-2" style="background: linear-gradient(135deg, #457b9d, #1d3557); border: none; border-radius: 10px;">
+                    <div class="card-body text-white">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="h5 mb-0 font-weight-bold">Data Siswa</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-list fa-2x text-light"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xl-3 col-sm-6 mb-4">
+            <a href="<?= base_url('transaksi') ?>" class="text-decoration-none">
+                <div class="card shadow h-100 py-2" style="background: linear-gradient(135deg, #2a9d8f, #264653); border: none; border-radius: 10px;">
+                    <div class="card-body text-white">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="h5 mb-0 font-weight-bold">Bayar SPP</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-money-bill-wave fa-2x text-light"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <?php endif?>
 </div>
 <?= view('layout/footer.php') ?>

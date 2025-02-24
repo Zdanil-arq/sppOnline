@@ -113,7 +113,6 @@
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="<?= base_url('datasiswa') ?>">Data Siswa</a>
-                            <a class="collapse-item" href="forgot-password.html">Data Jurusan</a>
                             <a class="collapse-item" href="<?= base_url('datauser') ?>">Data Admin</a>
                         </div>
                     </div>
@@ -121,13 +120,11 @@
             <?php endif ?>
 
             <!-- Nav Item - Charts -->
-            <?php if (session()->role == 'siswa'): ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>tes siswa</span></a>
-                </li>
-            <?php endif ?>
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>tes siswa</span></a>
+            </li> -->
 
             <!-- Divider -->
 
