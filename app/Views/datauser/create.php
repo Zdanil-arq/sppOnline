@@ -26,15 +26,22 @@
                         <form action="<?= base_url('/datauser/store') ?>" method="POST">
                             <div class="form-grup mb-2">
                                 <label for="">Username</label>
-                                <input type="text" name="name" class="form-control" placeholder="Masukkan username" required>
+                                <input type="text" name="username" class="form-control"  placeholder="Masukkan username" required>
                             </div>
                             <div class="form-grup mb-2">
-                                <label for="">Email</label>
-                                <input type="email" name="email" class="form-control" placeholder="Masukkan email" required>
+                                <label for="">Nis</label>
+                                <input type="text" name="nis" class="form-control"  placeholder="Masukkan nis" required>
+                            </div>
+                            <div class="form-grup mb-4">
+                                <label for="">Role</label>
+                                <select name="role" class="form-select" required>
+                                    <option value="admin">admin</option>
+                                    <option value="siswa">siswa</option>
+                                </select>
                             </div>
                             <div class="form-grup mb-4">
                                 <label for="">Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Masukkan password" required>
+                                <input type="password" name="userpassword" class="form-control" placeholder="Masukkan password baru">
                             </div>
                             <button type="submit" class="btn btn-primary">SIMPAN</button>
                             <a href="<?= base_url('/datauser') ?>" class="btn btn-danger">KEMBALI</a>

@@ -60,21 +60,26 @@ class DataUserController extends BaseController
 
         // Define validation
         $validation = $this->validate([
-            'name' => [
+            'username' => [
                 'rules'  => 'required',
                 'errors' => [
                     'required' => 'Masukkan Username'
                 ]
             ],
-            'email' => [
-                'rules'  => 'required|valid_email|is_unique[users.email]',
+            'nis' => [
+                'rules'  => 'required',
                 'errors' => [
-                    'required' => 'Masukkan Email.',
-                    'valid_email' => 'Format Email tidak valid.',
-                    'is_unique' => 'Email sudah digunakan.'
+                    'required' => 'Masukkan nis.',
+                    'is_unique' => 'Nis sudah digunakkan.',
                 ]
             ],
-            'password' => [
+            'role' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Masukkan role.',
+                ]
+            ],
+            'userpassword' => [
                 'rules'  => 'required|min_length[8]',
                 'errors' => [
                     'required' => 'Masukkan Password.',
@@ -95,9 +100,10 @@ class DataUserController extends BaseController
 
             // Insert data into database
             $userModel->insert([
-                'name' => $this->request->getPost('name'),
-                'email' => $this->request->getPost('email'),
-                'password' => $this->request->getPost('password')
+                'username' => $this->request->getPost('username'),
+                'nis' => $this->request->getPost('nis'),
+                'role' => $this->request->getPost('role'),
+                'userpassword' => $this->request->getPost('userpassword')
             ]);
 
             // Flash message
@@ -108,7 +114,7 @@ class DataUserController extends BaseController
     }
 
     //function edit
-    public function edit($id_admin)
+    public function edit($id_user)
     {
         if (!$this->isLoggedIn()) {
             return redirect()->to('/');
@@ -121,7 +127,7 @@ class DataUserController extends BaseController
         $userModel = new UserModel();
 
         // Ambil data user berdasarkan ID
-        $user = $userModel->find($id_admin);
+        $user = $userModel->find($id_user);
 
         // Kirim data ke view   
         $data = [
@@ -133,7 +139,7 @@ class DataUserController extends BaseController
     }
 
     //function update
-    public function update($id_admin)
+    public function update($id_user)
     {
         if (!$this->isLoggedIn()) {
             return redirect()->to('/');
@@ -141,21 +147,26 @@ class DataUserController extends BaseController
 
         // Define validation
         $validation = $this->validate([
-            'name' => [
+            'username' => [
                 'rules'  => 'required',
                 'errors' => [
                     'required' => 'Masukkan Username'
                 ]
             ],
-            'email' => [
-                'rules'  => 'required|valid_email|is_unique[users.email]',
+            'nis' => [
+                'rules'  => 'required',
                 'errors' => [
-                    'required' => 'Masukkan Email.',
-                    'valid_email' => 'Format Email tidak valid.',
-                    'is_unique' => 'Email sudah digunakan.'
+                    'required' => 'Masukkan nis.',
+                    'is_unique' => 'Nis sudah digunakkan.',
                 ]
             ],
-            'password' => [
+            'role' => [
+                'rules'  => 'required',
+                'errors' => [
+                    'required' => 'Masukkan role.',
+                ]
+            ],
+            'userpassword' => [
                 'rules'  => 'required|min_length[8]',
                 'errors' => [
                     'required' => 'Masukkan Password.',
@@ -172,7 +183,7 @@ class DataUserController extends BaseController
             //render view with error validation message
             return view('datauser/edit', [
                 'title' => 'Edit Data Admin',
-                'user' => $userModel->find($id_admin),
+                'user' => $userModel->find($id_user),
                 'validation' => $this->validator
             ]);
         } else {
@@ -181,10 +192,11 @@ class DataUserController extends BaseController
             $userModel = new UserModel();
 
             //insert data into database
-            $userModel->update($id_admin, [
-                'name' => $this->request->getPost('name'),
-                'email' => $this->request->getPost('email'),
-                'password' => $this->request->getPost('password')
+            $userModel->update($id_user, [
+                'username' => $this->request->getPost('username'),
+                'nis' => $this->request->getPost('nis'),
+                'role' => $this->request->getPost('role'),
+                'userpassword' => $this->request->getPost('userpassword')
             ]);
 
             //flash message
@@ -195,7 +207,7 @@ class DataUserController extends BaseController
     }
 
     //function delete
-    public function delete($id_admin){
+    public function delete($id_user){
         if (!$this->isLoggedIn()) {
             return redirect()->to('/');
         }
@@ -205,10 +217,10 @@ class DataUserController extends BaseController
         //model initialize
         $userModel = new UserModel();
 
-        $user = $userModel->find($id_admin);
+        $user = $userModel->find($id_user);
 
         if ($user) {
-            $userModel->delete($id_admin);
+            $userModel->delete($id_user);
 
             //flash message
             session()->setFlashdata('message', 'Data Berhasil Dihapus');
